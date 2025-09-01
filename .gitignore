@@ -1,0 +1,17 @@
+Specific files to ignore
+
+src/MagicSumSolver_OLD.java
+Specific compiled files to ignore
+
+out/production/Magic Sums/MagicSumSolver_OLD.class
+General rules for Java projects
+Compiled class files and other build output
+
+*.class
+IDE-specific files (IntelliJ IDEA)
+
+.idea/
+*.iml
+OS-specific files
+
+.DS_Store
