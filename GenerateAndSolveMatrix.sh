@@ -49,12 +49,12 @@ echo "--- Step 2: Finding the compiled class directory ---"
 CLASSES_DIR=$(find "$PROJECT_DIR" -type d -path "*/out/production/Magic Sums" | head -n 1)
 
 if [ -z "$CLASSES_DIR" ] || [ ! -d "$CLASSES_DIR" ]; then
-    echo "Error: Could not find the directory containing your compiled Java classes."
-    echo "Please ensure your Java files are compiled and located under the '$PROJECT_DIR' directory."
+        echo "Error: Could not find the directory containing your compiled Java classes."
+        echo "Please ensure your Java files are compiled and located under your project's directory."
     exit 1
 fi
 
-echo "Found classes directory: $CLASSES_DIR"
+echo "Found classes directory: ./${CLASSES_DIR#$PROJECT_DIR/}"
 echo "----------------------------------------"
 
 ####################################################################################
@@ -70,7 +70,7 @@ if [ $? -ne 0 ]; then
     rm -f "$INPUT_FILE"
     exit 1
 fi
-echo "Successfully generated new matrix file: $INPUT_FILE"
+echo "Successfully generated new matrix file: ./${INPUT_FILE#$PROJECT_DIR/}"
 echo "----------------------------------------"
 
 
@@ -81,7 +81,7 @@ echo "----------------------------------------"
 ####################################################################################
 
 echo "--- Step 4: Running the Magic Sum Solver ---"
-echo "Processing and solving the puzzle from $INPUT_FILE..."
+echo "Processing and solving the puzzle from ./${INPUT_FILE#$PROJECT_DIR/}..."
 (cd "$CLASSES_DIR" && java MagicSumSolver < "$INPUT_FILE") > "$SOLVED_FILE"
 
 if [ $? -ne 0 ]; then
@@ -90,6 +90,6 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Solution saved to: $SOLVED_FILE"
+echo "Solution saved to: ./${SOLVED_FILE#$PROJECT_DIR/}"
 echo "----------------------------------------"
 echo "Workflow complete."
